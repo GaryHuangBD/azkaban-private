@@ -1,3 +1,4 @@
 _AzkabanTestDir*
 *.log
 /build/
+/azkaban-execserver.iml

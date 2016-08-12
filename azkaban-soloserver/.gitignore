@@ -7,3 +7,4 @@ temp/
 validator_jars/
 *.log
 /build/
+/azkaban-soloserver.iml

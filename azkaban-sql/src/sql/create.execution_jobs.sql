@@ -17,3 +17,6 @@ CREATE TABLE execution_jobs (
 CREATE INDEX exec_job ON execution_jobs(exec_id, job_id);
 CREATE INDEX exec_id ON execution_jobs(exec_id);
 CREATE INDEX ex_job_id ON execution_jobs(project_id, job_id);
+
+alter table execution_jobs add business_time VARCHAR(20);
+CREATE INDEX ex_job_busi_time ON execution_jobs(project_id, job_id, status, business_time);

@@ -169,12 +169,13 @@ public class FileIOUtils {
       }
     }
 
-    List<File> scriptFiles = new ArrayList<>();
+    if(scriptPath!= null) {
+      List<File> scriptFiles = new ArrayList<>();
+      getAllScripts(scriptPath, scriptFiles);
 
-    getAllScripts(scriptPath, scriptFiles);
-
-    for (File file : scriptFiles) {
-      parseFileParameters(file, props);
+      for (File file : scriptFiles) {
+        parseFileParameters(file, props);
+      }
     }
   }
 

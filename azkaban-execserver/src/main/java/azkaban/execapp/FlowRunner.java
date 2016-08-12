@@ -77,7 +77,7 @@ public class FlowRunner extends EventHandler implements Runnable {
   // most part, we'll be idling.
   private static final long CHECK_WAIT_MS = 5 * 60 * 1000;
   private static final String PROPERTY_SUFFIX = ".properties";
-  private static final String BUSINESS_TIME = "business.time";
+  private static final String BUSINESS_TIME = "businessTime";
   private static final String SCRIPT = "script";
 
   private Logger logger;
@@ -730,8 +730,16 @@ public class FlowRunner extends EventHandler implements Runnable {
     customizeJobProperties(props);
 
     loadProjectProperties(props);
+    addSystemProperties(props);
 
     return props;
+  }
+
+  private void addSystemProperties(Props props) {
+    Props sysProps = this.jobtypeManager.getSysProps();
+    if(sysProps != null && sysProps.size() > 0){
+      props.putAll(sysProps);
+    }
   }
 
   private void loadProjectProperties(Props props) throws IOException {
@@ -742,9 +750,9 @@ public class FlowRunner extends EventHandler implements Runnable {
         props = new Props(props, file);
       }
     }
-    String busiTime = props.getString(BUSINESS_TIME);
-    busiTime = ExprSupport.parseExpr(busiTime);
-    props.put(BUSINESS_TIME, busiTime);
+//    String busiTime = props.getString(BUSINESS_TIME);
+//    busiTime = ExprSupport.parseExpr(busiTime);
+//    props.put(BUSINESS_TIME, busiTime);
   }
 
   private void runExecutableNode(ExecutableNode node) throws IOException {

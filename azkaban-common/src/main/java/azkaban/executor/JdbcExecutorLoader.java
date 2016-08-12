@@ -454,7 +454,7 @@ public class JdbcExecutorLoader extends AbstractJdbcLoader implements
     final String INSERT_EXECUTION_NODE =
             "INSERT INTO execution_jobs "
                     + "(exec_id, project_id, version, flow_id, job_id, start_time, "
-                    + "end_time, status, input_params, attempt) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                    + "end_time, status, input_params, attempt, business_time) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
     byte[] inputParam = null;
     if (inputProps != null) {
@@ -475,7 +475,7 @@ public class JdbcExecutorLoader extends AbstractJdbcLoader implements
       runner.update(INSERT_EXECUTION_NODE, flow.getExecutionId(),
               flow.getProjectId(), flow.getVersion(), flowId, node.getId(),
               node.getStartTime(), node.getEndTime(), node.getStatus().getNumVal(),
-              inputParam, node.getAttempt());
+              inputParam, node.getAttempt(), inputProps.getString("businessTime", ""));
     } catch (SQLException e) {
       throw new ExecutorManagerException("Error writing job " + node.getId(), e);
     }

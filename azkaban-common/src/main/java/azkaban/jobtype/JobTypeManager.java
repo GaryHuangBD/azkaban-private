@@ -55,14 +55,20 @@ public class JobTypeManager {
 
   private JobTypePluginSet pluginSet;
   private Props globalProperties;
+  private Props sysProps;
 
   public JobTypeManager(String jobtypePluginDir, Props globalProperties,
-      ClassLoader parentClassLoader) {
+      ClassLoader parentClassLoader, Props sysProps) {
     this.jobTypePluginDir = jobtypePluginDir;
     this.parentLoader = parentClassLoader;
     this.globalProperties = globalProperties;
+    this.sysProps = sysProps;
 
     loadPlugins();
+  }
+
+  public Props getSysProps() {
+    return sysProps;
   }
 
   public void loadPlugins() throws JobTypeManagerException {

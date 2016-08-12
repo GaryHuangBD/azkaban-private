@@ -185,7 +185,7 @@ public class FlowRunnerManager implements EventListener,
         new JobTypeManager(props.getString(
             AzkabanExecutorServer.JOBTYPE_PLUGIN_DIR,
             JobTypeManager.DEFAULT_JOBTYPEPLUGINDIR), globalProps,
-            parentClassLoader);
+            parentClassLoader, props);
   }
 
   private TrackingThreadPool createExecutorService(int nThreads) {
